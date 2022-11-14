@@ -14,7 +14,7 @@ import { JoinRoom, CreateRoom } from "./components";
 
 function App() {
 	return (
-		<div className="main-container">
+		<main>
 			<Routes>
 				{/* Pages */}
 				<Route path="/" element={<Home />} />
@@ -27,7 +27,7 @@ function App() {
 				<Route path="/JoinRoom" element={<JoinRoom />} />
 				<Route path="/createRoom" element={<CreateRoom />} />
 			</Routes>
-		</div>
+		</main>
 	);
 }
 

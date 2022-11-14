@@ -1,5 +1,4 @@
 /* Root Variables */
-
 :root {
 	--primary-color: rgb(62, 69, 79);
 	--secondary-color: rgb(245, 202, 47);
@@ -16,6 +15,11 @@
 body {
 	height: 100vh;
 	width: 100%;
+	background-color: var(--primary-color);
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 a,
@@ -33,6 +37,13 @@ h3,
 h4 {
 	font-family: "Kanit", sans-serif;
 	font-weight: 700;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	font-size: 40px;
+	margin-bottom: 1rem;
 }
 
 a,
@@ -48,6 +59,9 @@ label {
 
 .main-container {
 	width: 90%;
-	margin: 0 auto;
+	margin: 1rem auto;
+	padding: 0.5rem;
 	max-width: 1200px;
+	background-color: var(--secondary-color);
+	border-radius: 12px;
 }

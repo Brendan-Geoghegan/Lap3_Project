@@ -1,15 +1,17 @@
+
 import React, { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
 import {
-	Home,
-	Leaderboard,
-	WaitingRoom,
-	Quiz,
-	Results,
-	NotFound,
-} from "./pages";
+    Home,
+    Leaderboard,
+    WaitingRoom,
+    Quiz,
+    Results,
+    NotFound,
+} from './pages';
+
 
 import { Room, BackButton } from "./components";
 

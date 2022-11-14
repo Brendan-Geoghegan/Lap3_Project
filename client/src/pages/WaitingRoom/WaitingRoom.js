@@ -12,13 +12,11 @@ const WaitingRoom = () => {
     allPlayers
    } = useContext(QuizContext)
 
-		console.log(room);
-
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const leaveRoom = () => {
 		// Sends message to Backend
-		socket.emit("leave", { room, username });
-		navigate("/");
+		socket.emit("leave_room", { room, username });
+		// navigate("/");
 	};
 
 	const renderPlayers = () => {

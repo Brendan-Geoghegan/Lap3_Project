@@ -1,0 +1,22 @@
+#quizpage {
+    display: flex;
+    flex-direction: column;
+}
+
+#currentScore{
+    margin: 25px 40px;
+    font-size: large;
+}
+
+#questionSection {
+    margin: 25px 40px;
+    margin-bottom: 50px;
+}
+
+#answerGrid {
+    text-align: center;
+}
+
+#quizDivider {
+    z-index: -1;
+}

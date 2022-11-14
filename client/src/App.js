@@ -18,7 +18,7 @@ function App() {
 			<Routes>
 				{/* Pages */}
 				<Route path="/" element={<Home />} />
-				<Route path="/leaderboards" element={<Leaderboard />} />
+				<Route path="/leaderboard" element={<Leaderboard />} />
 				<Route path="/waitingRoom" element={<WaitingRoom />} />
 				<Route path="/quiz" element={<Quiz />} />
 				<Route path="/results" element={<Results />} />

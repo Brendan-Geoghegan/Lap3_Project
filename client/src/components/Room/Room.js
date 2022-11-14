@@ -1,20 +1,26 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
+import { QuizContext } from "../../context/quizContext";
+
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
-const Room = ({
-	setRoom,
-	setAllPlayers,
-	room,
-	toggle,
-	setCategory,
-	setDifficulty,
-	username,
-	setUsername,
-}) => {
+
+
+const Room = () => {
 	const navigate = useNavigate();
+
+	const {setRoom,
+		setAllPlayers,
+		room,
+		toggle,
+		setCategory,
+		setDifficulty,
+		username,
+		setUsername} = useContext(QuizContext)
+
+		console.log(room);
 
 	const createRoom = (e) => {
 		e.preventDefault();
@@ -87,7 +93,7 @@ const Room = ({
 							<input
 								type="text"
 								placeholder="Enter Room..."
-								onChange={(e) => console.log(e.target.value)}
+								onChange={(e) => setRoom(e.target.value)}
 								required
 							/>
 							<input

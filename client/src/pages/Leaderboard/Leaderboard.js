@@ -1,4 +1,5 @@
 import React from 'react';
+<<<<<<< HEAD
 import './style.css';
 
 const data = [
@@ -23,6 +24,17 @@ export default function Leaderboard() {
                     );
                 })}
             </ul>
+=======
+import data from './data';
+
+export default function LeaderBoard({ data }) {
+    return (
+        <div>
+            <h1>LeaderBoard</h1>
+            {data.map((user) => {
+                return <div>{user.name}</div>;
+            })}
+>>>>>>> a4a527552955805431e6623a859bd65ba516f5ca
         </div>
     );
 }

@@ -3,7 +3,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import {
     Home,
-    Leaderboards,
+    Leaderboard,
     WaitingRoom,
     Quiz,
     Results,
@@ -15,7 +15,7 @@ function App() {
         <div className="main-container">
             <Routes>
                 <Route path="/" element={<Home />} />
-                <Route path="/leaderboards" element={<Leaderboards />} />
+                <Route path="/leaderboard" element={<Leaderboard />} />
                 <Route path="/waitingRoom" element={<WaitingRoom />} />
                 <Route path="/quiz" element={<Quiz />} />
                 <Route path="/results" element={<Results />} />

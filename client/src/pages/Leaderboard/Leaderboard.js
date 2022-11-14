@@ -1,5 +1,4 @@
 import React from 'react';
-<<<<<<< HEAD
 import './style.css';
 
 const data = [
@@ -11,30 +10,27 @@ const data = [
 
 export default function Leaderboard() {
     return (
-        <div className="leaderboard">
-            <h1>Leaderboard</h1>
-            <ul>
-                {data.map((user) => {
-                    return (
-                        <li>
-                            <small>{user.ranking}</small>
-                            <mark>{user.name}</mark>
-                            <small>{user.score}</small>
-                        </li>
-                    );
-                })}
-            </ul>
-=======
-import data from './data';
+        <div className="leaderboard-container">
+            <div className="leaderboard">
+                <h1>Leaderboard</h1>
+                <table>
+                    <tr>
+                        <th>Ranking</th>
+                        <th>Name</th>
+                        <th>Points</th>
+                    </tr>
 
-export default function LeaderBoard({ data }) {
-    return (
-        <div>
-            <h1>LeaderBoard</h1>
-            {data.map((user) => {
-                return <div>{user.name}</div>;
-            })}
->>>>>>> a4a527552955805431e6623a859bd65ba516f5ca
+                    {data.map((user) => {
+                        return (
+                            <tr>
+                                <td>{user.ranking}</td>
+                                <td>{user.name}</td>
+                                <td>{user.score}</td>
+                            </tr>
+                        );
+                    })}
+                </table>
+            </div>
         </div>
     );
 }

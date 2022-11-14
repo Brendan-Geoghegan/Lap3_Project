@@ -1,6 +1,6 @@
 import React from 'react';
 import './style.css';
-
+import dounut from './dounut.svg';
 const data = [
     { name: 'David', ranking: 1, score: 200 },
     { name: 'Brendon', ranking: 2, score: 1000 },
@@ -11,8 +11,10 @@ const data = [
 export default function Leaderboard() {
     return (
         <div className="leaderboard-container">
+            <img className="img-donut-one" src={dounut} alt="" />
             <div className="leaderboard">
                 <h1>Leaderboard</h1>
+
                 <table>
                     <tr>
                         <th>Ranking</th>
@@ -31,6 +33,7 @@ export default function Leaderboard() {
                     })}
                 </table>
             </div>
+            <img className="img-donut-two" src={dounut} alt="" />
         </div>
     );
 }

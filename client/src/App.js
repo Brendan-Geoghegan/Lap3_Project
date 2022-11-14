@@ -5,7 +5,7 @@ import { Home, Leaderboards, WaitingRoom, Quiz, Results, NotFound} from "./pages
 
 function App() {
 	return (
-		<>
+		<div className="main-container">
 		<Routes>
 		<Route path="/" element={<Home/>} />
 		<Route path="/leaderboards" element={<Leaderboards/>} />
@@ -14,7 +14,7 @@ function App() {
 		<Route path="/results" element={<Results/>} />
 		<Route path="*" element={<NotFound/>} />
 		</Routes>
-		</>
+		</div>
 	)
 }
 

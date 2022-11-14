@@ -1,0 +1,53 @@
+/* Root Variables */
+
+:root {
+	--primary-color: rgb(62, 69, 79);
+	--secondary-color: rgb(245, 202, 47);
+}
+
+/* General */
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	width: 100%;
+}
+
+a,
+button,
+input[type="button"],
+input[type="submit"] {
+	color: black;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+h1,
+h2,
+h3,
+h4 {
+	font-family: "Kanit", sans-serif;
+	font-weight: 700;
+}
+
+a,
+p,
+button,
+input,
+label {
+	font-family: "Poppins", sans-serif;
+	font-weight: 400;
+}
+
+/* Reuseable */
+
+.main-container {
+	width: 90%;
+	margin: 0 auto;
+	max-width: 1200px;
+}

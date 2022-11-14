@@ -1,4 +1,6 @@
 .leaderboard-container {
+    display: flex;
+    justify-content: center;
     max-width: 450px;
     margin: auto;
 }
@@ -23,4 +25,28 @@
     text-align: center;
     padding: 10px;
     font-family: 'Kanit', sans-serif;
+}
+
+.img-donut-one {
+    margin-right: 100px;
+    width: 300px;
+    animation: float 6s ease-in-out 2s infinite;
+}
+
+.img-donut-two {
+    margin-left: 100px;
+    width: 300px;
+    animation: float 6s ease-in-out 2s infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translatey(0px);
+    }
+    50% {
+        transform: translatey(-20px);
+    }
+    100% {
+        transform: translatey(0px);
+    }
 }

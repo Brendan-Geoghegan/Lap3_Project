@@ -1,24 +1,71 @@
 const express = require("express");
 const app = express();
+const http = require("http");
+const { Server } = require("socket.io");
 const cors = require("cors");
 
-//middleware
+// Middleware
 app.use(cors());
-app.use(express.json());
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-	console.log(`Server Listening on Port ${PORT}.`);
+// Create Server
+const server = http.createServer(app);
+
+// Socket.io new Server
+const io = new Server(server, {
+	cors: {
+		origin: "http://localhost:3000",
+		methods: ["GET", "POST"],
+	},
 });
 
-// GET Leaderboards
+// Socket.io events
+let users = [];
 
-app.get("/leaderboards", (req, res) => {
-	res.json({
-		leaderboards: [{ username: "testUser1", score: 550 }],
+io.on("connection", (socket) => {
+	socket.on("join_room", ({ room, username }) => {
+		// Crate User
+		const user = {
+			username,
+			room,
+			id: socket.id,
+		};
+		// Push User To array
+		users.push(user);
+		// Join Room
+		socket.join(room);
+		// Send All Users Array
+		io.sockets.in(room).emit(
+			"update_room",
+			users.filter((users) => users.room === room)
+		);
+	});
+
+	socket.on("leave_room", ({ room, username }) => {
+		// Remove User from Array
+		users = users.filter(
+			(users) => users.username !== username && users.room === room
+		);
+		// Send Updated Users Array
+		socket.to(room).emit("update_room", users);
+		// Leave Room
+		socket.disconnect();
+	});
+
+	socket.on("disconnect", () => {
+		// Get Disconnect User Room
+		const disconnectUser = users.filter((users) => users.id === socket.id)[0];
+		// Remove User from Room
+		users = users.filter((user) => user.id !== socket.id);
+		// Send Updated Users Array
+		io.sockets.in(disconnectUser?.room).emit(
+			"update_room",
+			users.filter((user) => user.room === disconnectUser?.room)
+		);
 	});
 });
 
-// POST Leaderboards
-
-module.exports = app;
+// Listen
+const PORT = 3001;
+server.listen(PORT, () => {
+	console.log(`Server is running on ${PORT}`);
+});

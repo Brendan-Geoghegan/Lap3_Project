@@ -3,12 +3,12 @@ import { NavLink } from "react-router-dom";
 import { Button, Icon } from "semantic-ui-react";
 import "./home.css";
 
-export default function Home() {
+export default function Home({ setToggle }) {
 	return (
 		<div id="homepage">
 			<h1>MandemzMad</h1>
 			<div id="homeContent">
-				<NavLink to="/joinRoom">
+				<NavLink to="/room" onClick={() => setToggle("join")}>
 					<Button animated>
 						<Button.Content visible>Join Room</Button.Content>
 						<Button.Content hidden>
@@ -17,7 +17,7 @@ export default function Home() {
 					</Button>
 				</NavLink>
 
-				<NavLink to="/createRoom">
+				<NavLink to="/room" onClick={() => setToggle("create")}>
 					<Button animated="fade">
 						<Button.Content visible>Create Room</Button.Content>
 						<Button.Content hidden>Let's get started!</Button.Content>

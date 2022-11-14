@@ -1,15 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter as Router } from 'react-router-dom';
-import "./main.css";
+import { BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
-import 'semantic-ui-css/semantic.min.css'
+import "semantic-ui-css/semantic.min.css";
+import "./main.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-	<React.StrictMode>
-		<Router>
-			<App />
-		</Router>
-	</React.StrictMode>
+	<Router>
+		<App />
+	</Router>
 );

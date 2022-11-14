@@ -1,2 +1,2 @@
-export { default as CreateRoom } from "./CreateRoom/CreateRoom";
-export { default as JoinRoom } from "./JoinRoom/JoinRoom";
+export { default as Room } from "./Room/Room";
+export { default as BackButton } from "./BackButton/BackButton";

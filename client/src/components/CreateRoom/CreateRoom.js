@@ -29,6 +29,7 @@ const CreateRoom = () => {
 	}, [socket]);
 	return (
 		<div>
+			<h1>Create Room</h1>
 			{!allPlayers.length && (
 				<form onSubmit={joinRoom}>
 					<input

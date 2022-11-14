@@ -1,4 +1,5 @@
 import React from 'react'
+import './waitingRoom.css'
 
 const dummyData = {
   code: "ABCD",
@@ -22,7 +23,7 @@ const renderPlayers = () => {
   return(
     dummyData.players.map((player) => {
       return (
-        <div>
+        <div className='player'>
           <h3>{player.username}</h3>
         </div>
       )
@@ -34,9 +35,11 @@ const renderPlayers = () => {
 const WaitingRoom = () => {
   return (
     <div>
-      <h1>Waiting for players...</h1>
+      <h1 className='waiting-for-players'>Waiting for players...</h1>
       <h2>Code: {dummyData.code}</h2>
-      {renderPlayers()}
+      <div className='players-list'>
+        {renderPlayers()}
+      </div>
       <button>Start</button>
       <button>Forfeit</button>
     </div>

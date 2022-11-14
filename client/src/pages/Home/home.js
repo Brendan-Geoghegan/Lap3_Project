@@ -24,7 +24,7 @@ export default function Home() {
 					</Button>
 				</NavLink>
 
-				<NavLink to="/leaderboards">
+				<NavLink to="/leaderboard">
 					<Button animated="vertical">
 						<Button.Content hidden>
 							<Icon name="trophy" />

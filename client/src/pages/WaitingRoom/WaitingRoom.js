@@ -1,27 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import { QuizContext } from "../../context/quizContext";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
-// const dummyData = {
-// 	code: "ABCD",
-// 	players: [
-// 		{
-// 			username: "Brendan",
-// 		},
-// 		{
-// 			username: "Matt",
-// 		},
-// 		{
-// 			username: "Ahmed",
-// 		},
-// 		{
-// 			username: "Dave",
-// 		},
-// 	],
-// };
+const WaitingRoom = () => {
 
-const WaitingRoom = ({ username, room, allPlayers }) => {
+  const {
+		room,
+		username,
+    allPlayers
+   } = useContext(QuizContext)
+
+		console.log(room);
+
 	const navigate = useNavigate();
 	const leaveRoom = () => {
 		// Sends message to Backend

@@ -1,31 +1,21 @@
 import React, { createContext, useState } from "react";
 
-let movieData = [
-	{
-		name: "Interstellar",
-		price: "$20",
-		id: 23234,
-	},
-	{
-		name: "Edge Of Tomorrow",
-		price: "$5",
-		id: 2323424,
-	},
-	{
-		name: "Lord Of The Rings",
-		price: "$12",
-		id: 23234566,
-	},
-];
 
-export const MovieContext = createContext();
+export const QuizContext = createContext();
 
-export const MovieProvider = (props) => {
-	const [movies, setMovies] = useState(movieData);
+export const QuizProvider = (props) => {
+	const [allPlayers, setAllPlayers] = useState([]);
+	const [room, setRoom] = useState("10000");
+	const [toggle, setToggle] = useState("");
+	const [category, setCategory] = useState(9);
+	const [difficulty, setDifficulty] = useState("easy");
+	const [data, setData] = useState([]);
+	const [username, setUsername] = useState("");
+
 
 	return (
-		<MovieContext.Provider value={[movies, setMovies]}>
+		<QuizContext.Provider value={{allPlayers, setAllPlayers, room, setRoom, toggle, setToggle, category, setCategory, difficulty, setDifficulty, data, setData, username, setUsername}}>
 			{props.children}
-		</MovieContext.Provider>
+		</QuizContext.Provider>
 	);
 };

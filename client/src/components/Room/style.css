@@ -1,3 +1,7 @@
+.create-room {
+	border: 2px solid black;
+}
+
 .create-room form {
 	display: flex;
 	flex-direction: column;
@@ -6,9 +10,11 @@
 	padding: 1rem;
 }
 
-.create-room input {
+.create-room input,
+.create-room select {
 	width: 300px;
 	padding: 1rem;
 	border-radius: 6px;
 	margin: 0.5rem 0;
+	border: none;
 }

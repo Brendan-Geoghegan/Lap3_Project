@@ -22,7 +22,9 @@ const io = new Server(server, {
 let users = [];
 
 io.on("connection", (socket) => {
-	socket.on("join_room", ({ room, username }) => {
+	socket.on("create_room", ({ username }) => {
+		// Generate Random Room number
+		const room = Math.floor(Math.random() * 10);
 		// Crate User
 		const user = {
 			username,
@@ -36,8 +38,28 @@ io.on("connection", (socket) => {
 		// Send All Users Array
 		io.sockets.in(room).emit(
 			"update_room",
-			users.filter((users) => users.room === room)
+			users.filter((users) => users.room == room)
 		);
+	});
+
+	socket.on("join_room", ({ username, room }) => {
+		console.log("user trying to join room: ", room);
+		// Crate User
+		const user = {
+			username,
+			room,
+			id: socket.id,
+		};
+		// Push User To array
+		users.push(user);
+		// Join Room
+		socket.join(room);
+		// Send All Users Array
+		io.sockets.in(room).emit(
+			"update_room",
+			users.filter((users) => users.room == room)
+		);
+		console.log(users);
 	});
 
 	socket.on("leave_room", ({ room, username }) => {
@@ -61,6 +83,7 @@ io.on("connection", (socket) => {
 			"update_room",
 			users.filter((user) => user.room === disconnectUser?.room)
 		);
+		console.log(users);
 	});
 });
 

@@ -1,28 +1,30 @@
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import axios from "axios";
 
+import { QuizContext } from "./context/quizContext";
+
 import {
-    Home,
-    Leaderboard,
-    WaitingRoom,
-    Quiz,
-    Results,
-    NotFound,
+	Home,
+	Leaderboard,
+	WaitingRoom,
+	Quiz,
+	Results,
+	NotFound,
 } from './pages';
 
 
 import { Room, BackButton } from "./components";
 
 function App() {
-	const [allPlayers, setAllPlayers] = useState([]);
-	const [roomies, setRoomies] = useState("10000");
-	const [toggle, setToggle] = useState("");
-	const [category, setCategory] = useState(9);
-	const [difficulty, setDifficulty] = useState("easy");
-	const [data, setData] = useState([]);
-	const [username, setUsername] = useState("");
+
+	const {
+		difficulty,
+		category,
+		setData
+	 } = useContext(QuizContext)
+
 
 	useEffect(() => {
 		const fetch = async () => {
@@ -39,20 +41,12 @@ function App() {
 			<BackButton />
 			<Routes>
 				{/* Pages */}
-				<Route path="/" element={<Home setToggle={setToggle} />} />
+				<Route path="/" element={<Home />} />
 				<Route path="/leaderboard" element={<Leaderboard />} />
 				<Route
 					path="/waitingRoom"
 					element={
-						<WaitingRoom
-							allPlayers={allPlayers}
-							roomies={roomies}
-							setAllPlayers={setAllPlayers}
-							setRoomies={setRoomies}
-							category={category}
-							difficulty={difficulty}
-							username={username}
-						/>
+						<WaitingRoom />
 					}
 				/>
 				<Route path="/quiz" element={<Quiz />} />
@@ -62,16 +56,7 @@ function App() {
 				<Route
 					path="/room"
 					element={
-						<Room
-							setAllPlayers={setAllPlayers}
-							setRoomies={setRoomies}
-							allPlayers={allPlayers}
-							toggle={toggle}
-							setCategory={setCategory}
-							setDifficulty={setDifficulty}
-							setUsername={setUsername}
-							username={username}
-						/>
+						<Room />
 					}
 				/>
 			</Routes>

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { Button, Icon } from "semantic-ui-react";
 import "./home.css";
 
-export default function Home({ setToggle }) {
+import { QuizContext } from "../../context/quizContext";
+
+export default function Home() {
+
+	const {setToggle} = useContext(QuizContext)
+
 	return (
 		<div id="homepage">
 			<h1>MandemzMad</h1>

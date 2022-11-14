@@ -16,24 +16,26 @@ const CreateRoom = () => {
 	};
 
 	return (
-		<div className="main-container create-room">
+		<>
 			<h1>Create Room</h1>
-			{!allPlayers.length && (
-				<form onSubmit={joinRoom}>
-					<input
-						type="text"
-						placeholder="Room Code..."
-						onChange={(e) => setRoom(e.target.value)}
-					/>
-					<input
-						type="text"
-						placeholder="Username..."
-						onChange={(e) => setUsername(e.target.value)}
-					/>
-					<input type="button" value="Join Room" onClick={joinRoom} />
-				</form>
-			)}
-		</div>
+			<div className="main-container create-room">
+				{!allPlayers.length && (
+					<form onSubmit={joinRoom}>
+						<input
+							type="text"
+							placeholder="Room Code..."
+							onChange={(e) => setRoom(e.target.value)}
+						/>
+						<input
+							type="text"
+							placeholder="Username..."
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+						<input type="button" value="Join Room" onClick={joinRoom} />
+					</form>
+				)}
+			</div>
+		</>
 	);
 };
 

@@ -1,12 +1,9 @@
-.create-room {
-	text-align: center;
-}
-
 .create-room form {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	padding: 1rem;
 }
 
 .create-room input {

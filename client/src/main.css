@@ -37,6 +37,13 @@ h3,
 h4 {
 	font-family: "Kanit", sans-serif;
 	font-weight: 700;
+	color: white;
+	text-align: center;
+}
+
+h1 {
+	font-size: 40px;
+	margin-bottom: 1rem;
 }
 
 a,

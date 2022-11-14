@@ -13,7 +13,6 @@ import {
 function App() {
 	return (
 		<div className="main-container">
-			<h1>App</h1>
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/leaderboards" element={<Leaderboards />} />

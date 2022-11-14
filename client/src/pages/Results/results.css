@@ -1,0 +1,11 @@
+#finalResultheader {
+    display: flex;
+    justify-content: center;
+    margin: 25px 40px;
+}
+
+#finalResultsection {
+    border: 2px black solid;
+    padding: 15px 15px;
+    padding-top: 25px;
+}

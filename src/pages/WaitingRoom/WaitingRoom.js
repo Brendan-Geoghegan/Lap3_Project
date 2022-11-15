@@ -37,7 +37,7 @@ const WaitingRoom = () => {
 	return (
 		<div className="main-container">
 			<h1>Waiting for players...</h1>
-			<h2>Code: {userData?.room}</h2>
+			<h2>{userData?.room}</h2>
 			{renderPlayers()}
 			<div className="btns">
 				{isHost && <button onClick={startQuiz}>Start</button>}

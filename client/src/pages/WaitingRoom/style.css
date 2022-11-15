@@ -1,0 +1,39 @@
+/* Players*/
+.player {
+	background-color: var(--primary-color);
+	padding: 2rem 1rem;
+	border-radius: 12px;
+	margin: 0.5rem 0;
+	color: white;
+	font-weight: 700;
+	font-size: 18px;
+	box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+	border: none;
+	transition: 0.3s ease-in-out;
+	width: 100%;
+}
+
+/* Buttons */
+.btns {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.btns button {
+	background-color: var(--primary-color);
+	padding: 1rem 2rem;
+	border-radius: 12px;
+	margin: 1rem 0.5rem;
+	color: white;
+	font-weight: 700;
+	font-size: 18px;
+	box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.5);
+	border: none;
+	transition: 0.3s ease-in-out;
+	width: 40%;
+}
+
+.btns button:hover {
+	box-shadow: 4px 4px black;
+}

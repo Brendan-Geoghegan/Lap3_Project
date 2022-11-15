@@ -6,7 +6,7 @@ export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
 	useEffect(() => {
 		const fetch = async () => {
-			const data = await axios.get(`http://localhost:5000/leaderboards`);
+			const data = await axios.get(`http://localhost:3001/leaderboards`);
 			sortLeaderboards(data.data.result);
 		};
 		fetch();

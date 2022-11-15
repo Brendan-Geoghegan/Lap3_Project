@@ -1,0 +1,8 @@
+[build]
+    command = "cd client; npm run build" # how to trigger a build
+    publish = "/client/build" # what folder to publish
+
+[[redirects]]
+    from = "/*" # redirect any path
+    to = "/index.html" # to this html page
+    status = 200 # with this status

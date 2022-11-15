@@ -63,21 +63,24 @@ describe("multiplayer function", () => {
       cy.get('[name="category"]').select('Animals');
       cy.get('[name="difficulty"]').select('Medium');
       cy.get('[type="submit"]').click();
+      cy.get('h2').then(($h2) => {
+        const text = $h2.text()
+      })
   });
 
-    it("returns to the home page", () => {
-      cy.get('.back-btn').click();
-      cy.wait(500)
-      cy.get('.back-btn').click();
-    })
+//     it("returns to the home page", () => {
+//       cy.get('.back-btn').click();
+//       cy.wait(500)
+//       cy.get('.back-btn').click();
+//     })
 
-    it("successfully opens join room", () => {
-      cy.get(':nth-child(1) > .ui').click();
-      cy.get('[placeholder="Enter Room..."]').type('1')
-      cy.get('[placeholder="Enter Username..."]').type('Dave');
-      cy.get('[type="submit"]').click();
-  });
-});
+//     it("successfully opens join room", () => {
+//       cy.get(':nth-child(1) > .ui').click();
+//       cy.get('[placeholder="Enter Room..."]').type('1')
+//       cy.get('[placeholder="Enter Username..."]').type('Dave');
+//       cy.get('[type="submit"]').click();
+//   });
+// });
 
 
 

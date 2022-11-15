@@ -130,6 +130,16 @@ io.on("connection", (socket) => {
 // routes
 app.use("/leaderboards", Leaderboards);
 
+// Default
+
+app.get("/", async (req, res) => {
+	try {
+		res.status(200).json({ result: "Quiz API" });
+	} catch (error) {
+		res.status(404).json({ msg: error.message });
+	}
+});
+
 // Listen
 const PORT = process.env.PORT || 3001;
 

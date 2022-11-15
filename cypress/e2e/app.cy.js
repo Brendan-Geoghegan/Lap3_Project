@@ -6,7 +6,7 @@ describe("user creating a room", () => {
 
     it("user opens create room", () => {
       cy.get(':nth-child(2) > .ui').click();
-      cy.get('[type="text"]').clear().type('1');
+      cy.get('[type="text"]').clear().type('mc');
       cy.get('[name="category"]').select('Animals');
       cy.get('[name="difficulty"]').select('Medium');
       cy.get('[type="submit"]').click();
@@ -50,7 +50,34 @@ describe("user accesses leaderboard", () => {
           cy.get('.back-btn').click();
         })
 })
-  
+
+describe("multiplayer function", () => {
+
+  it("opens homepage successfully", () => {
+      cy.visit("http://localhost:3000/");
+  });
+
+    it("user opens create room", () => {
+      cy.get(':nth-child(2) > .ui').click();
+      cy.get('[type="text"]').clear().type('');
+      cy.get('[name="category"]').select('Animals');
+      cy.get('[name="difficulty"]').select('Medium');
+      cy.get('[type="submit"]').click();
+  });
+
+    it("returns to the home page", () => {
+      cy.get('.back-btn').click();
+      cy.wait(500)
+      cy.get('.back-btn').click();
+    })
+
+    it("successfully opens join room", () => {
+      cy.get(':nth-child(1) > .ui').click();
+      cy.get('[placeholder="Enter Room..."]').type('1')
+      cy.get('[placeholder="Enter Username..."]').type('Dave');
+      cy.get('[type="submit"]').click();
+  });
+});
 
 
 

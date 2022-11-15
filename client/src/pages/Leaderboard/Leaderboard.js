@@ -1,39 +1,49 @@
-import React from 'react';
-import './style.css';
-import dounut from './dounut.svg';
-const data = [
-    { name: 'David', ranking: 1, score: 200 },
-    { name: 'Brendon', ranking: 2, score: 1000 },
-    { name: 'Matt', ranking: 3, score: 300 },
-    { name: 'Ahmed', ranking: 4, score: 500 },
-];
+import React, { useEffect, useState } from "react";
+import "./style.css";
+import axios from "axios";
 
 export default function Leaderboard() {
-    return (
-        <div className="leaderboard-container">
-            <img className="img-donut-one" src={dounut} alt="" />
-            <div className="leaderboard">
-                <h1>Leaderboard</h1>
+	const [topScores, setTopScores] = useState();
+	useEffect(() => {
+		const fetch = async () => {
+			const data = await axios.get(`http://localhost:5000/leaderboards`);
+			sortLeaderboards(data.data.result);
+		};
+		fetch();
+	}, []);
 
-                <table>
-                    <tr>
-                        <th>Ranking</th>
-                        <th>Name</th>
-                        <th>Points</th>
-                    </tr>
+	const sortLeaderboards = (data) => {
+		setTopScores(
+			data?.sort((a, b) => {
+				return b.score - a.score;
+			})
+		);
+	};
 
-                    {data.map((user) => {
-                        return (
-                            <tr>
-                                <td>{user.ranking}</td>
-                                <td>{user.name}</td>
-                                <td>{user.score}</td>
-                            </tr>
-                        );
-                    })}
-                </table>
-            </div>
-            <img className="img-donut-two" src={dounut} alt="" />
-        </div>
-    );
+	return (
+		<div className="leaderboard-container">
+			<div className="leaderboard">
+				<h1>Leaderboards</h1>
+				<table>
+					<tbody>
+						<tr>
+							<th>Ranking</th>
+							<th>Name</th>
+							<th>Points</th>
+						</tr>
+
+						{topScores?.map((user, index) => {
+							return (
+								<tr key={index}>
+									<td>{index + 1}</td>
+									<td>{user.username}</td>
+									<td>{user.score}</td>
+								</tr>
+							);
+						})}
+					</tbody>
+				</table>
+			</div>
+		</div>
+	);
 }

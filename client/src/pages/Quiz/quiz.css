@@ -1,6 +1,16 @@
-#quizpage {
+#quizPage {
+    display: flex;
+    justify-content: center;
+}
+
+#quizcontent {
     display: flex;
     flex-direction: column;
+    background-color: rgb(245, 202, 47);
+    padding: 0.5rem;
+    width: 90%;
+    border-radius: 12px;
+    border: 2px solid black;
 }
 
 #currentScore{
@@ -15,8 +25,5 @@
 
 #answerGrid {
     text-align: center;
-}
-
-#quizDivider {
-    z-index: -1;
+    padding-bottom: 2rem;
 }

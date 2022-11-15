@@ -20,8 +20,6 @@ const Room = () => {
 		username,
 		setUsername} = useContext(QuizContext)
 
-		console.log(room);
-
 	const createRoom = (e) => {
 		e.preventDefault();
 		// Sends message to Backend
@@ -42,6 +40,7 @@ const Room = () => {
 
 	useEffect(() => {
 		socket.off("update_room").on("update_room", (users) => {
+			console.log("users", users);
 			setAllPlayers(users);
 			setRoom(users[0]?.room);
 		});

@@ -1,0 +1,24 @@
+#finalResultspage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#finalResultheader {
+    display: flex;
+    justify-content: center;
+    margin: 25px 40px;
+}
+
+#finalResultsection {
+    border: 2px black solid;
+    padding: 1rem;
+    padding-top: 25px;
+    background-color: rgb(245, 202, 47);
+    width: 80%;
+    border-radius: 30px;
+}
+
+.ui.inverted.progress .bar {
+    border: 2px solid black;
+}

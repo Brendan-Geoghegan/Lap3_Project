@@ -1,10 +1,8 @@
 
 import React, { useEffect, useContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
-
 import { QuizContext } from "./context/quizContext";
-
 import {
 	Home,
 	Leaderboard,
@@ -17,21 +15,44 @@ import {
 
 import { Room, BackButton } from "./components";
 
+
+import io from "socket.io-client";
+const URL = "http://localhost:3001"
+
+
 function App() {
+
+	const navigate = useNavigate()
 
 	const {
 		difficulty,
 		category,
-		setData
+		setData,
+		socket,
+		setSocket,
+		setAllPlayers,
+		setRoom,
 	 } = useContext(QuizContext)
+
+	useEffect(() => {
+		const newSocket = io(URL)
+		newSocket.on("update_room", (users) => {
+			setAllPlayers(users);
+			setRoom(users[0]?.room);
+		});
+		newSocket.on("game_started", (users) => {
+			navigate("/quiz")
+		});
+		setSocket(newSocket)
+	}, [])
 
 
 	useEffect(() => {
 		const fetch = async () => {
 			const data = await axios.get(
-				`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}`
+				`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 			);
-			setData(data);
+			setData(data.data.results);
 		};
 		fetch();
 	}, [category, difficulty]);

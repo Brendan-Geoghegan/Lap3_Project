@@ -4,7 +4,7 @@ import "./style.css";
 import { QuizContext } from "../../context/quizContext";
 
 import io from "socket.io-client";
-const socket = io.connect("https://mandem-quiz.herokuapp.com/");
+const socket = io.connect("http://localhost:3001");
 
 
 
@@ -12,7 +12,7 @@ const Room = () => {
 	const navigate = useNavigate();
 
 	const {setRoom,
-		setAllPlayers,
+		socket,
 		room,
 		toggle,
 		setCategory,
@@ -38,13 +38,12 @@ const Room = () => {
 		}
 	};
 
-	useEffect(() => {
-		socket.off("update_room").on("update_room", (users) => {
-			console.log("users", users);
-			setAllPlayers(users);
-			setRoom(users[0]?.room);
-		});
-	}, [socket]);
+	// useEffect(() => {
+	// 	socket.off("update_room").on("update_room", (users) => {
+	// 		setAllPlayers(users);
+	// 		setRoom(users[0]?.room);
+	// 	});
+	// }, [socket]);
 
 	return (
 		<>

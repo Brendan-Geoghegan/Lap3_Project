@@ -3,9 +3,13 @@ const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
 const cors = require("cors");
+const connectDB = require("./db/connect");
+const Leaderboards = require("./Routes/Leaderboards");
+require("dotenv").config();
 
 // Middleware
 app.use(cors());
+app.use(express.json());
 
 // Create Server
 const server = http.createServer(app);
@@ -43,7 +47,6 @@ io.on("connection", (socket) => {
 	});
 
 	socket.on("join_room", ({ username, room }) => {
-		console.log("user trying to join room: ", room);
 		// Crate User
 		const user = {
 			username,
@@ -59,7 +62,6 @@ io.on("connection", (socket) => {
 			"update_room",
 			users.filter((users) => users.room == room)
 		);
-		console.log(users);
 	});
 
 	socket.on("leave_room", ({ room, username }) => {
@@ -67,13 +69,14 @@ io.on("connection", (socket) => {
 		users = users.filter(
 			(users) => users.username !== username && users.room === room
 		);
+		// Leave Room
+		socket.leave(room);
 		// Send Updated Users Array
 		socket.to(room).emit("update_room", users);
-		// Leave Room
-		socket.disconnect();
 	});
 
 	socket.on("disconnect", () => {
+		console.log("disconnect running");
 		// Get Disconnect User Room
 		const disconnectUser = users.filter((users) => users.id === socket.id)[0];
 		// Remove User from Room
@@ -87,8 +90,19 @@ io.on("connection", (socket) => {
 	});
 });
 
+// routes
+app.use("/leaderboards", Leaderboards);
+
 // Listen
-const PORT = 3001;
-server.listen(PORT, () => {
-	console.log(`Server is running on ${PORT}`);
-});
+const PORT = process.env.PORT || 5000;
+
+const start = async () => {
+	try {
+		connectDB(process.env.DATABASE_URL);
+		server.listen(PORT, () => console.log(PORT));
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+start();

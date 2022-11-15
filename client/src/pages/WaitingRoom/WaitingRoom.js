@@ -17,6 +17,7 @@ const WaitingRoom = () => {
 
 	const renderPlayers = () => {
 		return allPlayers.map((player, index) => {
+			console.log(player);
 			return (
 				<div key={index} className="player">
 					<h3>{player.username}</h3>

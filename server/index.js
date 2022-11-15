@@ -65,7 +65,7 @@ io.on("connection", (socket) => {
 			users.filter((users) => users.room == room)
 		);
 		// sending updated players to host
-		const host = users.find(users => users.host)
+		const host = users.find((users) => users.host);
 		io.to(host.id).emit(
 			"update_room",
 			users.filter((users) => users.room == room)
@@ -75,7 +75,7 @@ io.on("connection", (socket) => {
 	socket.on("leave_room", ({ room, username }) => {
 		// Remove User from Array
 		users = users.filter(
-		  (users) => users.username !== username && users.room === room
+			(users) => users.username !== username && users.room === room
 		);
 		// Leave Room
 		socket.leave(room);
@@ -83,9 +83,8 @@ io.on("connection", (socket) => {
 		socket.to(room).emit("update_room", users);
 		// Leave Room
 		socket.disconnect();
-	  });
-	  socket.on("disconnect", () => {
 	});
+	socket.on("disconnect", () => {});
 
 	socket.on("disconnect", () => {
 		console.log("disconnect running");
@@ -95,44 +94,54 @@ io.on("connection", (socket) => {
 		users = users.filter((user) => user.id !== socket.id);
 		// Send Updated Users Array
 		io.sockets.in(disconnectUser?.room).emit(
-		  "update_room",
-		  users.filter((user) => user.room === disconnectUser?.room)
+			"update_room",
+			users.filter((user) => user.room === disconnectUser?.room)
 		);
-	  });
+	});
 
-// 	socket.on("leave_room", ({ room, username }) => {
-// 		// Remove User from Array
-// 		console.log("users before", users);
-// 		users = users.filter(
-// 			(users) => users.username !== username && users.room == room
-// 		);
-// 		socket.leave(room);
-// 		console.log("users after", users);
-// 		// Send Updated Users Array
-// 		socket.to(room).emit("update_room", users);
-// 		// Leave Room
-// 		socket.disconnect()
-// 	});
+	// 	socket.on("leave_room", ({ room, username }) => {
+	// 		// Remove User from Array
+	// 		console.log("users before", users);
+	// 		users = users.filter(
+	// 			(users) => users.username !== username && users.room == room
+	// 		);
+	// 		socket.leave(room);
+	// 		console.log("users after", users);
+	// 		// Send Updated Users Array
+	// 		socket.to(room).emit("update_room", users);
+	// 		// Leave Room
+	// 		socket.disconnect()
+	// 	});
 
-// 	socket.on("disconnect", () => {
-// 		// Get Disconnect User Room
-// 		const disconnectUser = users.filter((users) => users.id === socket.id)[0];
-// 		// Remove User from Room
-// 		users = users.filter((user) => user.id !== socket.id);
-// 		// Send Updated Users Array
-// 		io.sockets.in(disconnectUser?.room).emit(
-// 			"update_room",
-// 			users.filter((user) => user.room === disconnectUser?.room)
-// 		);
-// 		console.log(users);
-// 	});
+	// 	socket.on("disconnect", () => {
+	// 		// Get Disconnect User Room
+	// 		const disconnectUser = users.filter((users) => users.id === socket.id)[0];
+	// 		// Remove User from Room
+	// 		users = users.filter((user) => user.id !== socket.id);
+	// 		// Send Updated Users Array
+	// 		io.sockets.in(disconnectUser?.room).emit(
+	// 			"update_room",
+	// 			users.filter((user) => user.room === disconnectUser?.room)
+	// 		);
+	// 		console.log(users);
+	// 	});
 });
 
 // routes
 app.use("/leaderboards", Leaderboards);
 
+// Default
+
+app.get("/", async (req, res) => {
+	try {
+		res.status(200).json({ result: "Quiz API" });
+	} catch (error) {
+		res.status(404).json({ msg: error.message });
+	}
+});
+
 // Listen
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 
 const start = async () => {
 	try {

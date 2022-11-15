@@ -1,30 +1,25 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import "./style.css";
 import { QuizContext } from "../../context/quizContext";
 
-import io from "socket.io-client";
-const socket = io.connect("http://localhost:3001");
-
-
-
 const Room = () => {
 	const navigate = useNavigate();
 
-	const {setRoom,
+	const {
 		socket,
-		room,
 		toggle,
 		setCategory,
 		setDifficulty,
-		username,
-		setUsername} = useContext(QuizContext)
+		userData,
+		setUserData
+	} = useContext(QuizContext)
 
 	const createRoom = (e) => {
 		e.preventDefault();
 		// Sends message to Backend
-		if (username !== "") {
-			socket.emit("create_room", { username });
+		if (userData.username !== "") {
+			socket.emit("create_room", { username: userData.username });
 			navigate("/waitingRoom");
 		}
 	};
@@ -32,18 +27,11 @@ const Room = () => {
 	const joinRoom = (e) => {
 		e.preventDefault();
 		// Sends message to Backend
-		if (username !== "" && room) {
-			socket.emit("join_room", { username, room });
+		if (userData.username !== "" && userData.room) {
+			socket.emit("join_room", { username: userData.username, room: userData.room });
 			navigate("/waitingRoom");
 		}
 	};
-
-	// useEffect(() => {
-	// 	socket.off("update_room").on("update_room", (users) => {
-	// 		setAllPlayers(users);
-	// 		setRoom(users[0]?.room);
-	// 	});
-	// }, [socket]);
 
 	return (
 		<>
@@ -55,7 +43,11 @@ const Room = () => {
 							<input
 								type="text"
 								placeholder="Enter Username..."
-								onChange={(e) => setUsername(e.target.value)}
+								onChange={(e) => {
+									setUserData(prev => {
+										return {...prev, username: e.target.value}
+									});
+								}}
 								required
 							/>
 							<select
@@ -91,13 +83,21 @@ const Room = () => {
 							<input
 								type="text"
 								placeholder="Enter Room..."
-								onChange={(e) => setRoom(e.target.value)}
+								onChange={(e) => {
+									setUserData(prev => {
+										return {...prev, room: e.target.value}
+									});
+								}}
 								required
 							/>
 							<input
 								type="text"
 								placeholder="Enter Username..."
-								onChange={(e) => setUsername(e.target.value)}
+								onChange={(e) => {
+									setUserData(prev => {
+										return {...prev, username: e.target.value}
+									});
+								}}
 								required
 							/>
 							<input type="submit" value="Join Room" />

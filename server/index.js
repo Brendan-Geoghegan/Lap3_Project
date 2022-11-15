@@ -34,6 +34,7 @@ io.on("connection", (socket) => {
 			username,
 			room,
 			id: socket.id,
+			host: true,
 		};
 		// Push User To array
 		users.push(user);
@@ -52,6 +53,7 @@ io.on("connection", (socket) => {
 			username,
 			room,
 			id: socket.id,
+			host: false,
 		};
 		// Push User To array
 		users.push(user);
@@ -62,17 +64,27 @@ io.on("connection", (socket) => {
 			"update_room",
 			users.filter((users) => users.room == room)
 		);
+		// sending updated players to host
+		const host = users.find(users => users.host)
+		io.to(host.id).emit(
+			"update_room",
+			users.filter((users) => users.room == room)
+		);
 	});
 
 	socket.on("leave_room", ({ room, username }) => {
 		// Remove User from Array
 		users = users.filter(
-			(users) => users.username !== username && users.room === room
+		  (users) => users.username !== username && users.room === room
 		);
 		// Leave Room
 		socket.leave(room);
 		// Send Updated Users Array
 		socket.to(room).emit("update_room", users);
+		// Leave Room
+		socket.disconnect();
+	  });
+	  socket.on("disconnect", () => {
 	});
 
 	socket.on("disconnect", () => {
@@ -83,11 +95,37 @@ io.on("connection", (socket) => {
 		users = users.filter((user) => user.id !== socket.id);
 		// Send Updated Users Array
 		io.sockets.in(disconnectUser?.room).emit(
-			"update_room",
-			users.filter((user) => user.room === disconnectUser?.room)
+		  "update_room",
+		  users.filter((user) => user.room === disconnectUser?.room)
 		);
-		console.log(users);
-	});
+	  });
+
+// 	socket.on("leave_room", ({ room, username }) => {
+// 		// Remove User from Array
+// 		console.log("users before", users);
+// 		users = users.filter(
+// 			(users) => users.username !== username && users.room == room
+// 		);
+// 		socket.leave(room);
+// 		console.log("users after", users);
+// 		// Send Updated Users Array
+// 		socket.to(room).emit("update_room", users);
+// 		// Leave Room
+// 		socket.disconnect()
+// 	});
+
+// 	socket.on("disconnect", () => {
+// 		// Get Disconnect User Room
+// 		const disconnectUser = users.filter((users) => users.id === socket.id)[0];
+// 		// Remove User from Room
+// 		users = users.filter((user) => user.id !== socket.id);
+// 		// Send Updated Users Array
+// 		io.sockets.in(disconnectUser?.room).emit(
+// 			"update_room",
+// 			users.filter((user) => user.room === disconnectUser?.room)
+// 		);
+// 		console.log(users);
+// 	});
 });
 
 // routes

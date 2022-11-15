@@ -1,16 +1,12 @@
 import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
+import "./style.css";
 import io from "socket.io-client";
 const socket = io.connect("http://localhost:3001");
 
 const WaitingRoom = () => {
-
-  const {
-		room,
-		username,
-    allPlayers
-   } = useContext(QuizContext)
+	const { room, username, allPlayers } = useContext(QuizContext);
 
 	// const navigate = useNavigate();
 	const leaveRoom = () => {
@@ -22,7 +18,7 @@ const WaitingRoom = () => {
 	const renderPlayers = () => {
 		return allPlayers.map((player, index) => {
 			return (
-				<div key={index}>
+				<div key={index} className="player">
 					<h3>{player.username}</h3>
 				</div>
 			);
@@ -30,12 +26,14 @@ const WaitingRoom = () => {
 	};
 
 	return (
-		<div>
+		<div className="main-container">
 			<h1>Waiting for players...</h1>
 			<h2>Code: {room}</h2>
 			{renderPlayers()}
-			<button>Start</button>
-			<button onClick={leaveRoom}>Forfeit</button>
+			<div className="btns">
+				<button>Start</button>
+				<button onClick={leaveRoom}>Forfeit</button>
+			</div>
 		</div>
 	);
 };

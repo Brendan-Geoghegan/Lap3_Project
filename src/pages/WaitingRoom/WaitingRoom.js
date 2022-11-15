@@ -2,35 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
-import io from "socket.io-client";
 
 
 const WaitingRoom = () => {
-	const { room, username, allPlayers, data } = useContext(QuizContext);
+	const { allPlayers, userData, socket } = useContext(QuizContext);
 	const [isHost, setIsHost] = useState(false)
-
-	const socket = io.connect("http://localhost:3001");
 
 	const navigate = useNavigate();
 	const startQuiz = () => {
 		// Sends message to Backend
-		socket.emit("start_quiz", { room, username, data });
+		socket.emit("start_quiz", { room: userData.room, data: userData.data });
 		navigate("/quiz");
 	};
 
-	useEffect(() => {
-		console.log(1);
-		socket.on("game_started", (users) => {
-			console.log(2);
-			navigate("/quiz")
-		});
-		return () => {
-			socket.off("game_started");
-		}
-	}, [socket]);
-
 	const findHost = () => {
-		setIsHost(allPlayers.filter(user => user.host && user.username === username).length > 0)
+		setIsHost(allPlayers.filter(user => user.host && user.username === userData.username).length > 0)
 	}
 
 	useEffect(() => {
@@ -51,7 +37,7 @@ const WaitingRoom = () => {
 	return (
 		<div className="main-container">
 			<h1>Waiting for players...</h1>
-			<h2>Code: {room}</h2>
+			<h2>Code: {userData?.room}</h2>
 			{renderPlayers()}
 			<div className="btns">
 				{isHost && <button onClick={startQuiz}>Start</button>}

@@ -2,13 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
 
-const data = [
-	{ name: "David", ranking: 1, score: 200 },
-	{ name: "Brendon", ranking: 2, score: 1000 },
-	{ name: "Matt", ranking: 3, score: 300 },
-	{ name: "Ahmed", ranking: 4, score: 500 },
-];
-
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
 	useEffect(() => {

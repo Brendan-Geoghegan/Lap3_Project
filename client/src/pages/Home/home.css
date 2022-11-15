@@ -1,13 +1,33 @@
 #homepage {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 #homeContent {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#homeContent button {
+	width: 50vw;
+	margin: 1rem 0;
+	padding: 2rem;
+	box-shadow: 5px 5px 0 var(--secondary-color), 8px 8px 0 black;
+	font-size: 18px;
+	transition: 0.3s ease-in-out;
+}
+
+#homeContent button:hover {
+	transform: rotateZ(0.1deg);
+	background-color: var(--secondary-color);
+	color: black;
+	box-shadow: 5px 5px 0 black;
+}
+#homepage h1 {
+	text-shadow: 5px 5px 0 black;
+	font-size: 60px;
 }

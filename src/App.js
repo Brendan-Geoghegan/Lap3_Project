@@ -27,24 +27,36 @@ function App() {
 	const {
 		difficulty,
 		category,
-		setData,
 		socket,
 		setSocket,
 		setAllPlayers,
-		setRoom,
-	 } = useContext(QuizContext)
+		setUserData
+	} = useContext(QuizContext)
 
 	useEffect(() => {
 		const newSocket = io(URL)
 		newSocket.on("update_room", (users) => {
 			setAllPlayers(users);
-			setRoom(users[0]?.room);
+			setUserData(prev => {
+				return {...prev, room: users[0]?.room}
+			});
 		});
-		newSocket.on("game_started", (users) => {
-			navigate("/quiz")
-		});
+		// newSocket.on("game_started", () => {
+		// 	console.log("Game started");
+		// 	navigate("/quiz")
+		// });
 		setSocket(newSocket)
 	}, [])
+
+	useEffect(() => {
+		if(socket) {
+			socket.on("game_started", () => {
+				console.log(2);
+				navigate("/quiz")
+			});
+		}
+		
+	}, [socket]);
 
 
 	useEffect(() => {
@@ -52,7 +64,9 @@ function App() {
 			const data = await axios.get(
 				`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 			);
-			setData(data.data.results);
+			setUserData(prev => {
+				return {...prev, data: data.data.results}
+			});
 		};
 		fetch();
 	}, [category, difficulty]);

@@ -67,12 +67,12 @@ describe('multiplayer function', () => {
         cy.wait(500);
     });
 
-    it('grab random room number', () => {
-        cy.get('h2').then(($num) => {
-            // cy.get('.back-btn').click();
-        });
-        const h2 = cy.get('h2');
-        console.log(h2);
+    // it('grab random room number', () => {
+    //     cy.get('h2').then(($num) => {
+    //         // cy.get('.back-btn').click();
+    //     });
+    //     const h2 = cy.get('h2');
+    //     console.log(h2);
     });
     //     it('successfully opens join room', () => {
     //         cy.get(':nth-child(1) > .ui').click();

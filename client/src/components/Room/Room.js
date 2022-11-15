@@ -4,7 +4,7 @@ import "./style.css";
 import { QuizContext } from "../../context/quizContext";
 
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://mandem-quiz.herokuapp.com/");
 
 
 

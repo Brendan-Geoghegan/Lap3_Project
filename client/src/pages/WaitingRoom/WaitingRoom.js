@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
 import io from "socket.io-client";
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("https://mandem-quiz.herokuapp.com/");
 
 const WaitingRoom = () => {
 	const { room, username, allPlayers } = useContext(QuizContext);

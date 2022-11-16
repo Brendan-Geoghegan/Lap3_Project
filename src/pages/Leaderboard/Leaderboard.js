@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
@@ -22,8 +23,20 @@ export default function Leaderboard() {
 		);
 	};
 
+	const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
 	return (
 		<div className="leaderboard-container">
+			<div style={{ display: loading ? "block" : "none" }}>
+              <Dimmer active>
+                <Loader>Loading Leaderboard</Loader>
+              </Dimmer>
+            </div>
 			<div className="leaderboard">
 				<h1>Leaderboards</h1>
 				<table>

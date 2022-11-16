@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import happyhomer from './style.css';
-import dohhomer from './style.css';
+import React, { useState } from "react";
+import happyhomer from "./happyhomer.svg";
+import dohhomer from "./dohhomer.png";
+import "./style.css";
 
-export default function AnswerImage() {
-    const [answer, setAnswer] = useState('');
+export default function AnswerImage({ answerImg }) {
     return (
         <div>
-            {answer === 'correct' ? (
-                <img src={happyhomer} alt="happy homer" />
-            ) : (
-                <img src={happyhomer} alt="sad homer" />
-            )}
+            {answerImg === "correct" ? (
+                <img className="correct" src={happyhomer} alt="happy homer" />
+            ) : answerImg === "incorrect" ? (
+                <img className="incorrect" src={dohhomer} alt="sad homer" />
+            ) : undefined}
         </div>
     );
 }

@@ -6,16 +6,24 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 
 const Results = () => {
-	const { userData, setUserData } = useContext(QuizContext);
+	const { userData, socket, results } = useContext(QuizContext);
 
 	useEffect(() => {
 		const postData = async () => {
-			await axios
-				.post("https://mandem-quiz.herokuapp.com/leaderboards", userData)
-				.then((res) => console.log(res));
+			await axios.post(
+				"https://mandem-quiz.herokuapp.com/leaderboards",
+				userData
+			);
 		};
 		postData();
+		socket.emit("send_scores", {
+			username: userData.username,
+			room: userData.room,
+			score: userData.score,
+		});
 	}, []);
+
+	console.log(results.length);
 
 	return (
 		<div id="finalResultspage">
@@ -24,15 +32,32 @@ const Results = () => {
 			</div>
 
 			<div id="finalResultsection">
-				<section>
-					{userData.username}
-					<Progress
-						percent={userData.score / 10}
-						inverted
-						color="red"
-						progress
-					/>
-				</section>
+				{results.length > 0 ? (
+					results?.map((user) => {
+						return (
+							<section>
+								{user.username}
+								<Progress
+									percent={user.score / 10}
+									inverted
+									color="red"
+									progress
+								/>
+							</section>
+						);
+					})
+				) : (
+					<section>
+						{userData.username}
+						<Progress
+							percent={userData.score / 10}
+							inverted
+							color="red"
+							progress
+						/>
+					</section>
+				)}
+
 				<section>Your Score: {userData.score} / 1000</section>
 			</div>
 			<Link to="/">Back To home</Link>

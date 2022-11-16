@@ -14,7 +14,7 @@ import {
 import { Room, BackButton } from "./components";
 
 import io from "socket.io-client";
-const URL = "http://localhost:3001";
+const URL = "https://mandem-quiz.herokuapp.com/";
 
 function App() {
 	const navigate = useNavigate();

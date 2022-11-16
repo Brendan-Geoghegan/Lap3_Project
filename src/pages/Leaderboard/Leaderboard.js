@@ -34,8 +34,8 @@ export default function Leaderboard() {
 							<th>Points</th>
 						</tr>
 
-						{topScores?.map((user, index) => {
-							return (
+						{topScores?.slice(0, 10).map((user, index) => {
+								return (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{user.username}</td>

@@ -1,12 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Header, Segment, Grid } from "semantic-ui-react";
-import "./quiz.css";
+import "./style.css";
 import axios from "axios";
+import { QuizContext } from "../../context/quizContext";
+/*
+			if (option.includes("&#039;")) option = option.replaceAll("&#039;", "'");
+					updatedQuestion = updatedQuestion.replaceAll("&quot;", '"');
 
+*/
 const Quiz = () => {
+	const { userData, setUserData } = useContext(QuizContext);
 	const [data, setData] = useState([]);
-	const [score, setScore] = useState(0);
 	const [timer, setTimer] = useState(10);
 	const [questionData, setQuestionData] = useState({
 		question: "",
@@ -25,13 +30,26 @@ const Quiz = () => {
 			setData(res.data.results);
 			// Initial
 			setQuestionData((prev) => {
+				// Shuffle Array
 				const allAnswers = [
 					res.data.results[0].correct_answer,
 					...res.data.results[0].incorrect_answers,
 				];
 				const shuffled = shuffle(allAnswers);
+				// Fix Question
+				let updatedQuestion = res.data.results[0].question;
+				if (updatedQuestion.includes("&#039;")) {
+					updatedQuestion = updatedQuestion.replaceAll("&#039;", "'");
+				}
+				if (updatedQuestion.includes("&quot;")) {
+					updatedQuestion = updatedQuestion.replaceAll("&quot;", '"');
+				}
+				if (updatedQuestion.includes("&shy;")) {
+					updatedQuestion = updatedQuestion.replaceAll("&shy;", "-");
+				}
+
 				return {
-					question: res.data.results[0].question,
+					question: updatedQuestion,
 					number: 0,
 					correctAnswer: res.data.results[0].correct_answer,
 					answers: shuffled,
@@ -49,7 +67,20 @@ const Quiz = () => {
 	}, []);
 
 	const shuffle = (array) => {
-		return array.sort(() => Math.random() - 0.5);
+		const updatedArray = array.map((answer) => {
+			let newAnswer = answer;
+			if (answer.includes("&Eacute;")) {
+				newAnswer = newAnswer.replaceAll("&Eacute;", "É");
+			}
+			if (answer.includes("&#039;")) {
+				newAnswer = newAnswer.replaceAll("&#039;", "'");
+			}
+			if (answer.includes("&oacute;")) {
+				newAnswer = newAnswer.replaceAll("&oacute;", "ó");
+			}
+			return newAnswer;
+		});
+		return updatedArray.sort(() => Math.random() - 0.5);
 	};
 
 	const checkAnswer = (e) => {
@@ -61,12 +92,14 @@ const Quiz = () => {
 			// Disable buttons
 			btns.forEach((btn) => (btn.disabled = true));
 			// Update score
-			setScore((prev) => prev + 100);
+			setUserData((prev) => {
+				return { ...prev, score: prev.score + 100 };
+			});
 			// Next Question
 			setTimeout(() => {
 				e.target.style.backgroundColor = "#e0e1e2";
 				nextQuestion();
-			}, 3000);
+			}, 100);
 		} else {
 			// Change color
 			e.target.style.backgroundColor = "red";
@@ -75,7 +108,7 @@ const Quiz = () => {
 			setTimeout(() => {
 				e.target.style.backgroundColor = "#e0e1e2";
 				nextQuestion();
-			}, 3000);
+			}, 1000);
 		}
 	};
 
@@ -107,8 +140,8 @@ const Quiz = () => {
 		<>
 			<div id="quizPage">
 				<div id="quizcontent">
-					<div id="currentScore">Score: {score}</div>
-					<div>Timer: {timer}</div>
+					<div className="currentStats">Score: {userData.score}</div>
+					<div className="currentStats">Timer: {timer}</div>
 
 					<div id="questionSection">
 						<Header as="h2" attached="top">

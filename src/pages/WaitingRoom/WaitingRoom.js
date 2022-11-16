@@ -3,6 +3,7 @@ import TypewriterComponent from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
+import { Dimmer, Loader } from "semantic-ui-react";
 
 const WaitingRoom = () => {
 	const { allPlayers, userData, socket } = useContext(QuizContext);
@@ -37,8 +38,20 @@ const WaitingRoom = () => {
 		});
 	};
 
+	const [loading, setLoading] = useState(true);
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 1500);
+  }, []);
+
 	return (
 		<div className="main-container">
+			 <div style={{ display: loading ? "block" : "none" }}>
+              <Dimmer active>
+                <Loader>Waiting Room</Loader>
+              </Dimmer>
+            </div>
 			<h1><TypewriterComponent
 			options={{
 				strings: ["Waiting for players ..."],

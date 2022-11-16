@@ -1,77 +1,3 @@
-<<<<<<< HEAD
-import React, { useEffect, useState } from 'react';
-import { Button, Header, Segment, Grid } from 'semantic-ui-react';
-import AnswerImage from '../../components/AnswerImage/AnswerImage';
-import './quiz.css';
-import axios from 'axios';
-
-const Quiz = () => {
-    const [timer, setTimer] = useState(10);
-    const [questionData, setQuestionData] = useState({
-        question: '',
-        number: 0,
-        answers: '',
-    });
-
-    useEffect(() => {
-        const fetch = async () => {
-            const data = await axios.get(
-                `https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple`
-            );
-
-            // Initial
-            setQuestionData((prev) => {
-                const allAnswers = [
-                    data.data.results[0].correct_answer,
-                    ...data.data.results[0].incorrect_answers,
-                ];
-                const shuffled = shuffle(allAnswers);
-                return {
-                    question: data.data.results[0].question,
-                    number: 0,
-                    correctAnswer: data.data.results[0].correct_answer,
-                    answers: shuffled,
-                };
-            });
-            // Render New Question every ? Seconds
-            const quizInterval = setInterval(() => {
-                console.log(questionData);
-                if (questionData.number === 2) {
-                    clearInterval(quizInterval);
-                    return;
-                }
-                setQuestionData((prev) => {
-                    const allAnswers = [
-                        data.data.results[prev.number + 1].correct_answer,
-                        ...data.data.results[prev.number + 1].incorrect_answers,
-                    ];
-                    const shuffled = shuffle(allAnswers);
-                    return {
-                        question: data.data.results[prev.number + 1].question,
-                        number: (prev.number += 1),
-                        correctAnswer:
-                            data.data.results[prev.number].correct_answer,
-                        answers: shuffled,
-                    };
-                });
-            }, 10000);
-            // Render New Question every ? Seconds
-            setInterval(() => {
-                setTimer((prev) => (prev === 0 ? 9 : prev - 1));
-            }, 1000);
-        };
-        fetch();
-    }, []);
-
-    const shuffle = (array) => {
-        return array.sort(() => Math.random() - 0.5);
-    };
-    return (
-        <>
-            <div id="quizPage">
-                <div id="quizcontent">
-                    <div id="currentScore">Timer: {timer}</div>
-=======
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Header, Segment, Grid } from "semantic-ui-react";
@@ -213,6 +139,9 @@ const Quiz = () => {
 				<div id="quizcontent">
 					<div className="currentStats">Score: {userData.score}</div>
 					<div className="currentStats">Timer: {timer}</div>
+<<<<<<< HEAD
+>>>>>>> 83861c152c3b219e9ce69cd3a73a69e516555223
+=======
 >>>>>>> 83861c152c3b219e9ce69cd3a73a69e516555223
 
                     <div id="questionSection">

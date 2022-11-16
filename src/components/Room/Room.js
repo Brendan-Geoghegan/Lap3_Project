@@ -11,15 +11,21 @@ const Room = () => {
 		toggle,
 		setCategory,
 		setDifficulty,
+		category,
+		difficulty,
 		userData,
-		setUserData
-	} = useContext(QuizContext)
+		setUserData,
+	} = useContext(QuizContext);
 
 	const createRoom = (e) => {
 		e.preventDefault();
 		// Sends message to Backend
 		if (userData.username !== "") {
-			socket.emit("create_room", { username: userData.username });
+			socket.emit("create_room", {
+				username: userData.username,
+				category,
+				difficulty,
+			});
 			navigate("/waitingRoom");
 		}
 	};
@@ -28,7 +34,10 @@ const Room = () => {
 		e.preventDefault();
 		// Sends message to Backend
 		if (userData.username !== "" && userData.room) {
-			socket.emit("join_room", { username: userData.username, room: userData.room });
+			socket.emit("join_room", {
+				username: userData.username,
+				room: userData.room,
+			});
 			navigate("/waitingRoom");
 		}
 	};
@@ -44,8 +53,8 @@ const Room = () => {
 								type="text"
 								placeholder="Enter Username..."
 								onChange={(e) => {
-									setUserData(prev => {
-										return {...prev, username: e.target.value}
+									setUserData((prev) => {
+										return { ...prev, username: e.target.value };
 									});
 								}}
 								required
@@ -84,8 +93,8 @@ const Room = () => {
 								type="text"
 								placeholder="Enter Room..."
 								onChange={(e) => {
-									setUserData(prev => {
-										return {...prev, room: e.target.value}
+									setUserData((prev) => {
+										return { ...prev, room: e.target.value };
 									});
 								}}
 								required
@@ -94,8 +103,8 @@ const Room = () => {
 								type="text"
 								placeholder="Enter Username..."
 								onChange={(e) => {
-									setUserData(prev => {
-										return {...prev, username: e.target.value}
+									setUserData((prev) => {
+										return { ...prev, username: e.target.value };
 									});
 								}}
 								required

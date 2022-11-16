@@ -3,6 +3,7 @@ import { Progress } from "semantic-ui-react";
 import "./results.css";
 import { QuizContext } from "../../context/quizContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Results = () => {
 	const { userData, setUserData } = useContext(QuizContext);
@@ -34,6 +35,7 @@ const Results = () => {
 				</section>
 				<section>Your Score: {userData.score} / 1000</section>
 			</div>
+			<Link to="/">Back To home</Link>
 
 			{/* <div id="finalResultsection">
 				<section>

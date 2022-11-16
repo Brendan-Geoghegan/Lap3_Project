@@ -6,7 +6,8 @@ import axios from "axios";
 import { QuizContext } from "../../context/quizContext";
 
 const Quiz = () => {
-	const { userData, setUserData } = useContext(QuizContext);
+	const { userData, setUserData, category, difficulty } =
+		useContext(QuizContext);
 	const [data, setData] = useState([]);
 	const [timer, setTimer] = useState(10);
 	const [questionData, setQuestionData] = useState({
@@ -20,7 +21,7 @@ const Quiz = () => {
 	useEffect(() => {
 		const fetch = async () => {
 			const res = await axios.get(
-				`https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple`
+				`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 			);
 			// Save API Data
 			setData(res.data.results);

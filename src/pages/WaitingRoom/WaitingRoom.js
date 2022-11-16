@@ -3,10 +3,9 @@ import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
 
-
 const WaitingRoom = () => {
 	const { allPlayers, userData, socket } = useContext(QuizContext);
-	const [isHost, setIsHost] = useState(false)
+	const [isHost, setIsHost] = useState(false);
 
 	const navigate = useNavigate();
 	const startQuiz = () => {
@@ -16,13 +15,16 @@ const WaitingRoom = () => {
 	};
 
 	const findHost = () => {
-		setIsHost(allPlayers.filter(user => user.host && user.username === userData.username).length > 0)
-	}
+		setIsHost(
+			allPlayers.filter(
+				(user) => user.host && user.username === userData.username
+			).length > 0
+		);
+	};
 
 	useEffect(() => {
-		findHost()
-	}, [allPlayers])
-	
+		findHost();
+	}, [allPlayers]);
 
 	const renderPlayers = () => {
 		return allPlayers.map((player, index) => {
@@ -40,7 +42,8 @@ const WaitingRoom = () => {
 			<h2>Code: {userData?.room}</h2>
 			{renderPlayers()}
 			<div className="btns">
-				{isHost && <button onClick={startQuiz}>Start</button>}
+				{/* {isHost && <button onClick={startQuiz}>Start</button>} */}
+				<button onClick={startQuiz}>Start</button>
 				<button>Forfeit</button>
 			</div>
 		</div>

@@ -1,10 +1,10 @@
 import React, { createContext, useState } from "react";
 
-
 export const QuizContext = createContext();
 
 export const QuizProvider = (props) => {
 	const [socket, setSocket] = useState();
+	const [results, setResults] = useState([]);
 	const [allPlayers, setAllPlayers] = useState([]);
 	// const [room, setRoom] = useState("10000");
 	const [toggle, setToggle] = useState("");
@@ -20,12 +20,28 @@ export const QuizProvider = (props) => {
 		data: [{}],
 		score: 0,
 		completed: false,
-		gameStarted: false
-	})
-
+		gameStarted: false,
+	});
 
 	return (
-		<QuizContext.Provider value={{socket, setSocket, allPlayers, setAllPlayers, toggle, setToggle, category, setCategory, difficulty, setDifficulty, userData, setUserData}}>
+		<QuizContext.Provider
+			value={{
+				socket,
+				setSocket,
+				results,
+				setResults,
+				allPlayers,
+				setAllPlayers,
+				toggle,
+				setToggle,
+				category,
+				setCategory,
+				difficulty,
+				setDifficulty,
+				userData,
+				setUserData,
+			}}
+		>
 			{props.children}
 		</QuizContext.Provider>
 	);

@@ -38,8 +38,11 @@
 #answerGrid {
 	text-align: center;
 	padding-bottom: 2rem;
+}
+
+#answerSection {
 	display: flex;
-	justify-content: space-between;
+	justify-content: center;
 }
 
 /* #answerGrid button {
@@ -49,4 +52,13 @@
 	justify-content: space-around;
 	align-items: center;
 	font-size: 20px;
+<<<<<<< Updated upstream
 } */
+=======
+}
+
+.ui.grid>[class*="very relaxed"].row>.column, .ui[class*="very relaxed"].grid>.column:not(.row), .ui[class*="very relaxed"].grid>.row>.column {
+	padding: 0;
+	margin: 0;
+}
+>>>>>>> Stashed changes

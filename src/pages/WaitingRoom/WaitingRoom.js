@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import TypewriterComponent from "typewriter-effect";
 import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
@@ -38,7 +39,13 @@ const WaitingRoom = () => {
 
 	return (
 		<div className="main-container">
-			<h1>Waiting for players...</h1>
+			<h1><TypewriterComponent
+			options={{
+				strings: ["Waiting for players ..."],
+				autoStart: true,
+				pauseFor: 10000000000,
+			}}/></h1>
+
 			<h2>{userData?.room}</h2>
 			{renderPlayers()}
 			<div className="btns">

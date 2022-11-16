@@ -1,15 +1,18 @@
 .incorrect {
-    width: 36.5%;
+    width: 25%;
     position: absolute;
-    top: 9%;
-    left: 30%;
+    /* left: 35%; */
     z-index: 2;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .correct {
     width: 36.5%;
     position: absolute;
-    top: 9%;
-    left: 30%;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     z-index: 2;
 }

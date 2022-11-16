@@ -44,6 +44,7 @@ h4 {
 h1 {
 	font-size: 40px;
 	margin-bottom: 1rem;
+	-webkit-text-stroke: 2px black;
 }
 
 a,

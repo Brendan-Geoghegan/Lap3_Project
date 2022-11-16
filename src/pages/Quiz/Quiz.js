@@ -4,11 +4,7 @@ import { Button, Header, Segment, Grid } from "semantic-ui-react";
 import "./style.css";
 import axios from "axios";
 import { QuizContext } from "../../context/quizContext";
-/*
-			if (option.includes("&#039;")) option = option.replaceAll("&#039;", "'");
-					updatedQuestion = updatedQuestion.replaceAll("&quot;", '"');
 
-*/
 const Quiz = () => {
 	const { userData, setUserData } = useContext(QuizContext);
 	const [data, setData] = useState([]);

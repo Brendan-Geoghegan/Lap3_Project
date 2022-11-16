@@ -36,31 +36,37 @@ const Results = () => {
 					results?.map((user) => {
 						return (
 							<section>
-								{user.username}
+								<h2 className="username">User: {user.username}</h2>
 								<Progress
 									percent={user.score / 10}
 									inverted
 									color="red"
 									progress
+									size="large"
+									indicating
 								/>
 							</section>
 						);
 					})
 				) : (
 					<section>
-						{userData.username}
+						<h2 className="username">User: {userData.username}</h2>
 						<Progress
 							percent={userData.score / 10}
 							inverted
 							color="red"
 							progress
+							size="big"
+							indicating
 						/>
 					</section>
 				)}
 
-				<section>Your Score: {userData.score} / 1000</section>
+				<p className="score">Your Score: {userData.score} / 1000</p>
 			</div>
-			<Link to="/">Back To home</Link>
+			<Link to="/" className="home-btn">
+				Back To home
+			</Link>
 
 			{/* <div id="finalResultsection">
 				<section>

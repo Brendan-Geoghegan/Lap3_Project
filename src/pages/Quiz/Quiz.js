@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Header, Segment, Grid } from "semantic-ui-react";
+import AnswerImage from "../../components/AnswerImage/AnswerImage";
 import "./style.css";
 import axios from "axios";
 import { QuizContext } from "../../context/quizContext";
@@ -10,6 +11,7 @@ const Quiz = () => {
         useContext(QuizContext);
     const [data, setData] = useState([]);
     const [timer, setTimer] = useState(10);
+    const [answerImg, setAnswerImg] = useState("");
     const [questionData, setQuestionData] = useState({
         question: "",
         number: 0,
@@ -86,8 +88,10 @@ const Quiz = () => {
         if (answer === questionData.correctAnswer) {
             // Change color
             e.target.style.backgroundColor = "lime";
+            setAnswerImg("correct");
             // Disable buttons
             btns.forEach((btn) => (btn.disabled = true));
+
             // Update score
             setUserData((prev) => {
                 return { ...prev, score: prev.score + 100 };
@@ -95,15 +99,18 @@ const Quiz = () => {
             // Next Question
             setTimeout(() => {
                 e.target.style.backgroundColor = "#e0e1e2";
+                setAnswerImg("");
                 nextQuestion();
-            }, 100);
+            }, 1000);
         } else {
             // Change color
             e.target.style.backgroundColor = "red";
+            setAnswerImg("incorrect");
             // Disable buttons
             btns.forEach((btn) => (btn.disabled = true));
             setTimeout(() => {
                 e.target.style.backgroundColor = "#e0e1e2";
+                setAnswerImg("");
                 nextQuestion();
             }, 1000);
         }
@@ -189,6 +196,7 @@ const Quiz = () => {
                     </div>
                 </div>
             </div>
+            <AnswerImage answerImg={answerImg} />
         </>
     );
 };

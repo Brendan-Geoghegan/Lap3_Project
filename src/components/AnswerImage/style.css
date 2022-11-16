@@ -1,0 +1,15 @@
+.incorrect {
+    width: 36.5%;
+    position: absolute;
+    top: 9%;
+    left: 30%;
+    z-index: 2;
+}
+
+.correct {
+    width: 36.5%;
+    position: absolute;
+    top: 9%;
+    left: 30%;
+    z-index: 2;
+}

@@ -23,8 +23,10 @@ const Quiz = () => {
 			const res = await axios.get(
 				`https://opentdb.com/api.php?amount=10&category=${category}&difficulty=${difficulty}&type=multiple`
 			);
+			// RemoveSpecialChars
+			const updatedRes = RemoveSpecialChars(res.data.results);
 			// Save API Data
-			setData(res.data.results);
+			setData(updatedRes);
 			// Initial
 			setQuestionData((prev) => {
 				// Shuffle Array
@@ -33,31 +35,14 @@ const Quiz = () => {
 					...res.data.results[0].incorrect_answers,
 				];
 				const shuffled = shuffle(allAnswers);
-				// Fix Question
-				let updatedQuestion = res.data.results[0].question;
-				if (updatedQuestion.includes("&#039;")) {
-					updatedQuestion = updatedQuestion.replaceAll("&#039;", "'");
-				}
-				if (updatedQuestion.includes("&quot;")) {
-					updatedQuestion = updatedQuestion.replaceAll("&quot;", '"');
-				}
-				if (updatedQuestion.includes("&shy;")) {
-					updatedQuestion = updatedQuestion.replaceAll("&shy;", "-");
-				}
-
+				// Return object
 				return {
-					question: updatedQuestion,
+					question: updatedRes[0].question,
 					number: 0,
-					correctAnswer: res.data.results[0].correct_answer,
+					correctAnswer: updatedRes[0].correct_answer,
 					answers: shuffled,
 				};
 			});
-
-			// // Render New Question every ? Seconds
-			// const timerInterval = setInterval(() => {
-			// 	setTimer((prev) => (prev === 0 ? 9 : prev - 1));
-			// 	setTotalTime((prev) => prev + 1);
-			// }, 1000);
 		};
 
 		fetch();
@@ -131,6 +116,53 @@ const Quiz = () => {
 		const btns = document.querySelectorAll(".answer-btn");
 		btns.forEach((btn) => (btn.disabled = false));
 		// !Reset Timer Question
+	};
+
+	const RemoveSpecialChars = (data) => {
+		return data.map((obj) => {
+			// question
+			let newQuestion = obj.question;
+			if (newQuestion.includes("&#039;")) {
+				newQuestion = newQuestion.replaceAll("&#039;", "'");
+			}
+			if (newQuestion.includes("&quot;")) {
+				newQuestion = newQuestion.replaceAll("&quot;", '"');
+			}
+			if (newQuestion.includes("&shy;")) {
+				newQuestion = newQuestion.replaceAll("&shy;", "-");
+			}
+			if (newQuestion.includes("&Eacute;")) {
+				newQuestion = newQuestion.replaceAll("&Eacute;", "É");
+			}
+			if (newQuestion.includes("&oacute;")) {
+				newQuestion = newQuestion.replaceAll("&oacute;", "ó");
+			}
+			if (newQuestion.includes("&rsquo;")) {
+				newQuestion = newQuestion.replaceAll("&rsquo;", "'");
+			}
+			// answer
+			let newCorrect = obj.correct_answer;
+			if (newCorrect.includes("&#039;")) {
+				newCorrect = newCorrect.replaceAll("&#039;", "'");
+			}
+			if (newCorrect.includes("&quot;")) {
+				newCorrect = newCorrect.replaceAll("&quot;", '"');
+			}
+			if (newCorrect.includes("&shy;")) {
+				newCorrect = newCorrect.replaceAll("&shy;", "-");
+			}
+			if (newCorrect.includes("&Eacute;")) {
+				newCorrect = newCorrect.replaceAll("&Eacute;", "É");
+			}
+			if (newCorrect.includes("&oacute;")) {
+				newCorrect = newCorrect.replaceAll("&oacute;", "ó");
+			}
+			if (newCorrect.includes("&rsquo;")) {
+				newCorrect = newCorrect.replaceAll("&rsquo;", "'");
+			}
+			// return
+			return { ...obj, question: newQuestion, correct_answer: newCorrect };
+		});
 	};
 
 	return (

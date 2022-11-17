@@ -81,6 +81,9 @@ const Quiz = () => {
 			if (answer.includes("&oacute;")) {
 				answer = answer.replaceAll("&aacute;", "á");
 			}
+			if (answer.includes("&hellip;")) {
+				answer = answer.replaceAll("&hellip;", "...");
+			}
 			return newAnswer;
 		});
 		return updatedArray.sort(() => Math.random() - 0.5);
@@ -147,6 +150,9 @@ const Quiz = () => {
 			if (newQuestion.includes("&rdquo;")) {
 				newQuestion = newQuestion.replaceAll("&rdquo;", "”");
 			}
+			if (newQuestion.includes("&hellip;")) {
+				newQuestion = newQuestion.replaceAll("&hellip;", "...");
+			}
 			// answer
 			let newCorrect = obj.correct_answer;
 			if (newCorrect.includes("&#039;")) {
@@ -179,9 +185,13 @@ const Quiz = () => {
 			if (newCorrect.includes("&amp;")) {
 				newCorrect = newCorrect.replaceAll("&amp;", "&");
 			}
-			if (newQuestion.includes("&rdquo;")) {
-				newQuestion = newQuestion.replaceAll("&rdquo;", "”");
+			if (newCorrect.includes("&rdquo;")) {
+				newCorrect = newCorrect.replaceAll("&rdquo;", "”");
 			}
+			if (newCorrect.includes("&hellip;")) {
+				newCorrect = newCorrect.replaceAll("&hellip;", "...");
+			}
+
 			// return
 			return {
 				...obj,

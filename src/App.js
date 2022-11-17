@@ -34,7 +34,6 @@ function App() {
 	useEffect(() => {
 		const newSocket = io(URL);
 		newSocket.on("update_room", (data) => {
-			console.log(Object.keys(data[0]).length);
 			if (Object.keys(data[0]).length === 3) {
 				setResults(data);
 			}

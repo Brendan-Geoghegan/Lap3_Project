@@ -7,6 +7,9 @@ import { Link } from "react-router-dom";
 
 const Results = () => {
 	const { userData, socket, results } = useContext(QuizContext);
+	console.log(userData);
+	console.log(results);
+	console.log(results.filter((user) => user.username !== userData.username));
 
 	useEffect(() => {
 		const postData = async () => {
@@ -23,8 +26,6 @@ const Results = () => {
 		});
 	}, []);
 
-	console.log(results.length);
-
 	return (
 		<div id="finalResultspage">
 			<div id="finalResultheader">
@@ -32,23 +33,24 @@ const Results = () => {
 			</div>
 
 			<div id="finalResultsection">
-				{results.length > 0 ? (
-					results?.map((user) => {
-						return (
-							<section>
-								<h2 className="username">User: {user.username}</h2>
-								<Progress
-									percent={user.score / 10}
-									inverted
-									color="red"
-									progress
-									size="large"
-									indicating
-								/>
-							</section>
-						);
-					})
-				) : (
+				{results?.map((user) => {
+					return (
+						<section>
+							<h2 className="username">User: {user.username}</h2>
+							<Progress
+								percent={user.score / 10}
+								inverted
+								color="red"
+								progress
+								size="large"
+								indicating
+							/>
+						</section>
+					);
+				})}
+
+				{results.filter((user) => user.username === userData.username)
+					.length === 0 && (
 					<section>
 						<h2 className="username">User: {userData.username}</h2>
 						<Progress
@@ -56,7 +58,7 @@ const Results = () => {
 							inverted
 							color="red"
 							progress
-							size="big"
+							size="large"
 							indicating
 						/>
 					</section>

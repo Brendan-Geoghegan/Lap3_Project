@@ -186,7 +186,6 @@ const Quiz = () => {
         <AnswerImage answerImg={answerImg} />
         <div id="quizcontent">
           <div className="currentStats">Score: {userData.score}</div>
-          <div className="currentStats">Timer: {timer}</div>
 
           <div id="questionSection">
             

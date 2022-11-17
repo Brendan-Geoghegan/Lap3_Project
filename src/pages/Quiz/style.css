@@ -1,13 +1,13 @@
 #quizPage {
     display: flex;
     justify-content: center;
-    position: relative;
     overflow: hidden;
 }
 
 #quizcontent {
     display: flex;
     flex-direction: column;
+    position: relative;
     background-color: rgb(245, 202, 47);
     padding: 0.5rem;
     width: 90%;
@@ -17,7 +17,7 @@
 
 .currentStats {
     margin: 1rem 40px 0.5rem;
-    font-size: large;
+    font-size: 30px;
     color: black;
 }
 

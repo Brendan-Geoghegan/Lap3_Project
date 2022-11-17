@@ -9,7 +9,7 @@ const NotFound = () => {
             <div className="small-container">
                 <div className="small">
                     <h3>PAGE NOT FOUND</h3>
-                    <h4>Click to go back to home page</h4>
+                    <h4>Click the home button</h4>
                     <HomeButton />
                 </div>
                 <img src={notfound} alt="" />

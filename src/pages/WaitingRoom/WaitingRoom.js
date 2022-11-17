@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { QuizContext } from "../../context/quizContext";
 import "./style.css";
 import { Dimmer, Loader } from "semantic-ui-react";
+import { Zoom } from "react-reveal";
 
 const WaitingRoom = () => {
 	const { allPlayers, userData, socket } = useContext(QuizContext);
@@ -31,9 +32,11 @@ const WaitingRoom = () => {
 	const renderPlayers = () => {
 		return allPlayers.map((player, index) => {
 			return (
+				<Zoom left>
 				<div key={index} className="player">
 					<h3>{player.username}</h3>
 				</div>
+				</Zoom>
 			);
 		});
 	};

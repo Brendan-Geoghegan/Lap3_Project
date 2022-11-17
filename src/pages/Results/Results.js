@@ -5,6 +5,7 @@ import { QuizContext } from "../../context/quizContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { Confetti } from "../../components";
+import { Bounce } from "react-reveal";
 
 const Results = () => {
 	const { userData, socket, results } = useContext(QuizContext);
@@ -35,6 +36,7 @@ const Results = () => {
 				<div id="finalResultsection">
 					{results?.map((user) => {
 						return (
+							<Bounce top>
 							<section>
 								<h2 className="username">User: {user.username}</h2>
 								<Progress
@@ -45,12 +47,13 @@ const Results = () => {
 									size="large"
 									indicating
 								/>
-							</section>
+							</section></Bounce>
 						);
 					})}
 
 					{results.filter((user) => user.username === userData.username)
 						.length === 0 && (
+							<Bounce top>
 						<section>
 							<h2 className="username">User: {userData.username}</h2>
 							<Progress
@@ -61,10 +64,11 @@ const Results = () => {
 								size="large"
 								indicating
 							/>
-						</section>
+						</section></Bounce>
 					)}
 
 					<p className="score">Your Score: {userData.score} / 1000</p>
+					
 				</div>
 				<Link to="/" className="home-btn">
 					Back To home

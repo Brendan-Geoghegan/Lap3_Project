@@ -69,6 +69,9 @@ const Quiz = () => {
 			if (answer.includes("&ldquo;")) {
 				answer = answer.replaceAll("&ldquo;", "“");
 			}
+			if (answer.includes("&rdquo;")) {
+				answer = answer.replaceAll("&rdquo;", "”");
+			}
 			if (answer.includes("&iacute;")) {
 				answer = answer.replaceAll("&iacute;", "Í");
 			}
@@ -141,6 +144,9 @@ const Quiz = () => {
 			if (newQuestion.includes("&oacute;")) {
 				newQuestion = newQuestion.replaceAll("&aacute;", "á");
 			}
+			if (newQuestion.includes("&rdquo;")) {
+				newQuestion = newQuestion.replaceAll("&rdquo;", "”");
+			}
 			// answer
 			let newCorrect = obj.correct_answer;
 			if (newCorrect.includes("&#039;")) {
@@ -172,6 +178,9 @@ const Quiz = () => {
 			}
 			if (newCorrect.includes("&amp;")) {
 				newCorrect = newCorrect.replaceAll("&amp;", "&");
+			}
+			if (newQuestion.includes("&rdquo;")) {
+				newQuestion = newQuestion.replaceAll("&rdquo;", "”");
 			}
 			// return
 			return {

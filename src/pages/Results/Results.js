@@ -4,6 +4,7 @@ import "./results.css";
 import { QuizContext } from "../../context/quizContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Confetti } from "../../components";
 
 const Results = () => {
 	const { userData, socket, results } = useContext(QuizContext);
@@ -27,18 +28,36 @@ const Results = () => {
 	}, []);
 
 	return (
-		<div id="finalResultspage">
-			<div id="finalResultheader">
-				<h1>Final Results</h1>
-			</div>
+		<>
+			<Confetti />
+			<div id="finalResultspage">
+				<div id="finalResultheader">
+					<h1>Final Results</h1>
+				</div>
 
-			<div id="finalResultsection">
-				{results?.map((user) => {
-					return (
+				<div id="finalResultsection">
+					{results?.map((user) => {
+						return (
+							<section>
+								<h2 className="username">User: {user.username}</h2>
+								<Progress
+									percent={user.score / 10}
+									inverted
+									color="red"
+									progress
+									size="large"
+									indicating
+								/>
+							</section>
+						);
+					})}
+
+					{results.filter((user) => user.username === userData.username)
+						.length === 0 && (
 						<section>
-							<h2 className="username">User: {user.username}</h2>
+							<h2 className="username">User: {userData.username}</h2>
 							<Progress
-								percent={user.score / 10}
+								percent={userData.score / 10}
 								inverted
 								color="red"
 								progress
@@ -46,31 +65,15 @@ const Results = () => {
 								indicating
 							/>
 						</section>
-					);
-				})}
+					)}
 
-				{results.filter((user) => user.username === userData.username)
-					.length === 0 && (
-					<section>
-						<h2 className="username">User: {userData.username}</h2>
-						<Progress
-							percent={userData.score / 10}
-							inverted
-							color="red"
-							progress
-							size="large"
-							indicating
-						/>
-					</section>
-				)}
+					<p className="score">Your Score: {userData.score} / 1000</p>
+				</div>
+				<Link to="/" className="home-btn">
+					Back To home
+				</Link>
 
-				<p className="score">Your Score: {userData.score} / 1000</p>
-			</div>
-			<Link to="/" className="home-btn">
-				Back To home
-			</Link>
-
-			{/* <div id="finalResultsection">
+				{/* <div id="finalResultsection">
 				<section>
 					Player 1<Progress percent={40} inverted color="red" progress />
 				</section>
@@ -116,7 +119,8 @@ const Results = () => {
 					<Progress percent={72} inverted color="black" progress />
 				</section>
 			</div> */}
-		</div>
+			</div>
+		</>
 	);
 };
 

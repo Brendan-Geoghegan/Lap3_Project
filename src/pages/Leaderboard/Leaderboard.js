@@ -3,11 +3,7 @@ import "./style.css";
 import axios from "axios";
 // import { Dimmer, Loader } from "semantic-ui-react";
 import { LightSpeed } from "react-reveal";
-<<<<<<< HEAD
 import donut from "./donut.svg";
-=======
-
->>>>>>> b5be5e654377d7330962cc0747d21731e82b6140
 
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
@@ -43,10 +39,6 @@ export default function Leaderboard() {
                 <Loader>Loading Leaderboard</Loader>
               </Dimmer>
             </div> */}
-<<<<<<< HEAD
-=======
-
->>>>>>> b5be5e654377d7330962cc0747d21731e82b6140
 			<div className="leaderboard">
 				<LightSpeed left>
 				<h1>🏆  Leaderboards  🏆</h1>

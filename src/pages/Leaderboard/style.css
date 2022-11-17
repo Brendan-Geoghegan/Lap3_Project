@@ -50,3 +50,21 @@
 		transform: translatey(0px);
 	}
 }
+
+.donut {
+	position: absolute;
+	top: -15%;
+	right: -10%;
+	width: 30vw;
+	z-index: -100;
+	animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+	from {
+		-webkit-transform: rotate(0deg);
+	}
+	to {
+		-webkit-transform: rotate(360deg);
+	}
+}

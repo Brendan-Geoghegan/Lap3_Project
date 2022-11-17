@@ -1,0 +1,18 @@
+.back-btn {
+    /* top: 20px;
+    left: 5%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    padding: 1rem;
+    border-radius: 6px;
+    border: none;
+    transition: 0.3s ease-in-out; */
+}
+
+.back-btn:hover {
+    background-color: var(--secondary-color);
+    box-shadow: 2px 2px black;
+    font-weight: 700;
+}

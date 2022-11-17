@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    justify-content: center;
+}
+
+.small-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+img {
+    margin: auto;
+    display: block;
+    max-width: 500px;
+    margin-bottom: -7%;
+}
+
+button {
+    display: block;
+}
+
+.small h3 {
+    font-size: 80px;
+}
+.small h4 {
+    font-size: 30px;
+}
+
+.small {
+    margin: auto;
+    display: block;
+    padding: 20px;
+    border: 2px white solid;
+    max-width: 800px;
+}

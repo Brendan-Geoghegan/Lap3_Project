@@ -25,6 +25,21 @@ const Results = () => {
 		});
 	}, []);
 
+	const colors = [
+		"red",
+		"orange",
+		"yellow",
+		"olive",
+		"teal",
+		"blue",
+		"violet",
+		"purple",
+		"pink",
+		"brown",
+		"grey",
+		"black",
+	];
+
 	return (
 		<>
 			<Confetti />
@@ -34,41 +49,42 @@ const Results = () => {
 				</div>
 
 				<div id="finalResultsection">
-					{results?.map((user) => {
+					{results?.map((user, index) => {
 						return (
 							<Bounce top>
-							<section>
-								<h2 className="username">User: {user.username}</h2>
-								<Progress
-									percent={user.score / 10}
-									inverted
-									color="red"
-									progress
-									size="large"
-									indicating
-								/>
-							</section></Bounce>
+								<section>
+									<h2 className="username">User: {user.username}</h2>
+									<Progress
+										percent={user.score / 10}
+										inverted
+										color={colors[index]}
+										progress
+										size="large"
+										indicating
+									/>
+								</section>
+							</Bounce>
 						);
 					})}
 
 					{results.filter((user) => user.username === userData.username)
 						.length === 0 && (
-							<Bounce top>
-						<section>
-							<h2 className="username">User: {userData.username}</h2>
-							<Progress
-								percent={userData.score / 10}
-								inverted
-								color="red"
-								progress
-								size="large"
-								indicating
-							/>
-						</section></Bounce>
+						<Bounce top>
+							<section>
+								<h2 className="username">User: {userData.username}</h2>
+								<Progress
+									percent={userData.score / 10}
+									inverted
+									color="green"
+									progress
+									size="large"
+									indicating
+								/>
+							</section>
+						</Bounce>
 					)}
 
 					<p className="score">Your Score: {userData.score} / 1000</p>
-					
 				</div>
 				<Link to="/" className="home-btn">
 					Back To home

@@ -7,7 +7,7 @@ import { Zoom, Flip } from "react-reveal";
 import { QuizContext } from "../../context/quizContext";
 
 export default function Home() {
-  const { setToggle } = useContext(QuizContext);
+	const { setToggle } = useContext(QuizContext);
 
   return (
     <div id="homepage">

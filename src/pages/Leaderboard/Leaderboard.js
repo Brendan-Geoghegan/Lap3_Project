@@ -4,6 +4,7 @@ import axios from "axios";
 // import { Dimmer, Loader } from "semantic-ui-react";
 import { LightSpeed } from "react-reveal";
 
+
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
 	useEffect(() => {
@@ -38,6 +39,7 @@ export default function Leaderboard() {
                 <Loader>Loading Leaderboard</Loader>
               </Dimmer>
             </div> */}
+
 			<div className="leaderboard">
 				<LightSpeed left>
 				<h1>🏆  Leaderboards  🏆</h1>
@@ -51,7 +53,7 @@ export default function Leaderboard() {
 						</tr>
 
 						{topScores?.slice(0, 10).map((user, index) => {
-								return (
+							return (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{user.username}</td>
@@ -63,6 +65,7 @@ export default function Leaderboard() {
 				</table>
 				</LightSpeed>
 			</div>
+			<img  className="donut" src={donut} alt="donut" />
 		</div>
 	);
 }

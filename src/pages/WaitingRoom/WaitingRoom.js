@@ -42,14 +42,14 @@ const WaitingRoom = () => {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1200);
   }, []);
 
 	return (
 		<div className="main-container">
 			 <div style={{ display: loading ? "block" : "none" }}>
               <Dimmer active>
-                <Loader>Waiting Room</Loader>
+                <Loader>Rendering Waiting Room</Loader>
               </Dimmer>
             </div>
 			<h1><TypewriterComponent

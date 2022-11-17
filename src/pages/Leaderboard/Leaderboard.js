@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
-import { Dimmer, Loader } from "semantic-ui-react";
+// import { Dimmer, Loader } from "semantic-ui-react";
+import { LightSpeed } from "react-reveal";
 
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
@@ -23,25 +24,27 @@ export default function Leaderboard() {
 		);
 	};
 
-	const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
+// 	const [loading, setLoading] = useState(true);
+//   useEffect(() => {
+//     setTimeout(() => {
+//       setLoading(false);
+//     }, 500);
+//   }, []);
 
 	return (
 		<div className="leaderboard-container">
-			<div style={{ display: loading ? "block" : "none" }}>
+			{/* <div style={{ display: loading ? "block" : "none" }}>
               <Dimmer active>
                 <Loader>Loading Leaderboard</Loader>
               </Dimmer>
-            </div>
+            </div> */}
 			<div className="leaderboard">
-				<h1>Leaderboards</h1>
-				<table>
+				<LightSpeed left>
+				<h1>🏆  Leaderboards  🏆</h1>
+				</LightSpeed>
+				<LightSpeed right><table>
 					<tbody>
-						<tr>
+						<tr id="firstRow">
 							<th>Ranking</th>
 							<th>Name</th>
 							<th>Points</th>
@@ -58,6 +61,7 @@ export default function Leaderboard() {
 						})}
 					</tbody>
 				</table>
+				</LightSpeed>
 			</div>
 		</div>
 	);

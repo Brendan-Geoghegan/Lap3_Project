@@ -5,7 +5,7 @@ import "./style.css";
 const HomeButton = () => {
     const navigate = useNavigate();
     return (
-        <button className="back-btn" onClick={() => navigate(-1)}>
+        <button className="back-btn" onClick={() => navigate("/")}>
             Home
         </button>
     );

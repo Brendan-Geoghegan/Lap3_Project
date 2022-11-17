@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./style.css";
 import axios from "axios";
 import { Dimmer, Loader } from "semantic-ui-react";
+import donut from "./donut.svg";
 
 export default function Leaderboard() {
 	const [topScores, setTopScores] = useState();
@@ -24,19 +25,19 @@ export default function Leaderboard() {
 	};
 
 	const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-  }, []);
+	useEffect(() => {
+		setTimeout(() => {
+			setLoading(false);
+		}, 1500);
+	}, []);
 
 	return (
 		<div className="leaderboard-container">
 			<div style={{ display: loading ? "block" : "none" }}>
-              <Dimmer active>
-                <Loader>Loading Leaderboard</Loader>
-              </Dimmer>
-            </div>
+				<Dimmer active>
+					<Loader>Loading Leaderboard</Loader>
+				</Dimmer>
+			</div>
 			<div className="leaderboard">
 				<h1>Leaderboards</h1>
 				<table>
@@ -48,7 +49,7 @@ export default function Leaderboard() {
 						</tr>
 
 						{topScores?.slice(0, 10).map((user, index) => {
-								return (
+							return (
 								<tr key={index}>
 									<td>{index + 1}</td>
 									<td>{user.username}</td>
@@ -59,6 +60,7 @@ export default function Leaderboard() {
 					</tbody>
 				</table>
 			</div>
+			<img  className="donut" src={donut} alt="donut" />
 		</div>
 	);
 }

@@ -88,3 +88,21 @@ label {
 .custom-shape-divider-top-1668688783 .shape-fill {
 	fill: #f5ca2f;
 }
+
+.donut {
+	position: absolute;
+	top: -15%;
+	right: -10%;
+	width: 30vw;
+	z-index: -100;
+	animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}

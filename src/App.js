@@ -1,6 +1,7 @@
 import React, { useEffect, useContext } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import axios from "axios";
+import donut from "./donut.svg";
 import { QuizContext } from "./context/quizContext";
 import {
 	Home,
@@ -104,6 +105,7 @@ function App() {
 				{/* Components */}
 				<Route path="/room" element={<Room />} />
 			</Routes>
+			<img  className="donut" src={donut} alt="donut" />
 		</main>
 	);
 }

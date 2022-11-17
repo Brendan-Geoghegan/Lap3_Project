@@ -64,11 +64,7 @@ const WaitingRoom = () => {
 
 			<h2>{userData?.room}</h2>
 			{renderPlayers()}
-			<div className="btns">
-				{/* {isHost && <button onClick={startQuiz}>Start</button>} */}
-				<button onClick={startQuiz}>Start</button>
-				<button>Forfeit</button>
-			</div>
+				<button className="btns" onClick={startQuiz}>Start</button>
 		</div>
 	);
 };

@@ -12,7 +12,7 @@ import {
 } from "./pages";
 
 import { Room, BackButton } from "./components";
-
+import donut from "./donut.svg";
 import io from "socket.io-client";
 const URL = "https://mandem-quiz.herokuapp.com/";
 
@@ -104,6 +104,7 @@ function App() {
 				{/* Components */}
 				<Route path="/room" element={<Room />} />
 			</Routes>
+			<img className="donut" src={donut} alt="donut" />
 		</main>
 	);
 }
